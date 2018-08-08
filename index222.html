@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Webduino Blockly Demo 08</title>
+  <script src="js/jquery.min.js"></script>
+
+
+  <script src="js/tracking-min.js"></script>
+
+	<style>
+	#demo {
+  position: relative;
+  width: 400px;
+  height: 300px;
+}
+
+#demo-video {
+  position: absolute;
+  z-index:1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#demo div{
+  position:absolute;
+  z-index:2;
+}
+	</style>
+</head>
+
+<body>
+	
+	
+  <div id="demo">
+    <video id="demo-video" preload="" autoplay="" loop="" muted="" controls=""></video>
+    <!-- <canvas id="demo-area-08-canvas"></canvas> -->
+  </div>
+	
+	<script>
+	$(function(){
+  var track = {};
+  var $demo = $('#demo');
+
+  tracking.ColorTracker.registerColor("red", function(r, g, b) {
+    if (r > 160 && g < 80 && b < 80) {
+      return true;
+    }
+    return false;
+  });
+  tracking.ColorTracker.registerColor("green", function(r, g, b) {
+    if (r < 80 && g > 160 && b < 80) {
+      return true;
+    }
+    return false;
+  });
+
+  tracking.ColorTracker.registerColor("blue", function(r, g, b) {
+    if (r < 80 && g < 80 && b > 160) {
+      return true;
+    }
+    return false;
+  });
+		
+		tracking.ColorTracker.registerColor("yellow", function(r, g, b) {
+    if (r > 160 && g > 160 && b < 80) {
+      return true;
+    }
+    return false;
+  });
+		
+
+		
+		tracking.ColorTracker.registerColor("orange", function(r, g, b) {
+			
+    if (r == 254 && g == 112 && b == 65) {
+      return true;
+    }
+    return false;
+  });
+		
+		tracking.ColorTracker.registerColor("purple", function(r, g, b) {
+    if (r > 139 && g < 80 && b > 160) {
+      return true;
+    }
+    return false;
+  });
+
+  track.myTracker = new tracking.ColorTracker(["red", "green", "blue","yellow","orange","purple"]);
+  track.storkColor = {
+    
+    red: "#F00",
+	  green: "#0F0",
+	  blue: "#00F",
+    yellow: "#FF0",
+    orange: "#ff6e40",
+    purple: "#8b00ff"
+	  
+  };
+if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) { 
+	
+		var constraints = { audio: false, video: { facingMode: { exact: "environment" } }};//后置; 
+		
+	}else{
+ var constraints = { audio: false, video: { 'facingMode': "user" }};//后置; 
+	}
+navigator.mediaDevices.getUserMedia(constraints)
+.then(function(mediaStream) {
+  var video = document.querySelector('video');
+  video.srcObject = mediaStream;
+  video.onloadedmetadata = function(e) {
+    video.play();
+  };
+})
+.catch(function(err) { console.log(err.name + ": " + err.message); }); // 总是在最后检查错误
+		
+		
+		track.trackerTask = tracking.track("#demo-video", track.myTracker, {
+    
+  });
+		
+		
+
+  track.myTracker.on("track", function(event) {
+    if (event.data.length === 0) {
+          $('#demo div').remove(); //如果沒偵測到顏色，移除所有自動產生的追蹤方框
+		localStorage.name = '';
+		
+    } else {
+      $('#demo div').remove();  //一開始搜尋到顏色時，先清空對應的追蹤方框
+		localStorage.name = '';
+		
+      var divLength = event.data.length; //獲取顏色數量
+      event.data.forEach(function(e,i){
+        if($('#demo .div'+i).length === 0){
+          $('#demo').append('<div class="div'+i+'"></div>');  //產生對應的追蹤方框
+        }
+        //設定追蹤方框樣式
+        $('#demo .div'+i).css({
+           'border-width':'3px',
+           'border-style':'solid', 
+           'border-color':track.storkColor[e.color],
+           'left':e.x,
+           'top':e.y,
+           'width':e.width,
+           'height':e.height
+         });
+		  
+		  
+		  setInterval(function() {
+			 
+			  
+         if($('#demo .div'+i).css('border-color')=="rgb(255, 0, 0)"){
+			 	//localStorage.name = "UP";
+			 Input._onKeyDown({keyCode:104});
+			 
+			 
+		}else{
+			Input._onKeyUp({keyCode:104});
+			
+		}
+		  if($('#demo .div'+i).css('border-color')=="rgb(0, 255, 0)"){
+			 	//localStorage.name = "LEFT";
+			 
+			  Input._onKeyDown({keyCode:100});
+			 
+			 
+		}else{
+			Input._onKeyUp({keyCode:100});
+			
+		}
+			  if($('#demo .div'+i).css('border-color')=="rgb(0, 0, 255)"){
+			 	//localStorage.name = "RIGHT";
+			  Input._onKeyDown({keyCode:102});
+			 
+			 
+		}else{
+			Input._onKeyUp({keyCode:102});
+			
+		}
+			  if($('#demo .div'+i).css('border-color')=="rgb(255, 255, 0)"){
+			 	//localStorage.name = "DOWN";
+			  Input._onKeyDown({keyCode:98});
+			 
+			 
+		}else{
+			Input._onKeyUp({keyCode:98});
+			
+		}
+        
+			 // if($('#demo .div'+i).css('border-color')=="rgb(0, 0, 0)"){
+			 //	localStorage.name2 = "RUN";
+			 
+			 
+		//}
+			    if($('#demo .div'+i).css('border-color')=="rgb(254, 112, 65)"){
+			 	//localStorage.name = "B";
+			  Input._onKeyDown({keyCode:88});
+			 
+			 
+		}else{
+			Input._onKeyUp({keyCode:88});
+			
+		}
+			  
+			   if($('#demo .div'+i).css('border-color')=="rgb(139, 0, 255)"){
+			 	//localStorage.name = "A";
+			 
+			  Input._onKeyDown({keyCode:90});
+			 
+			 
+		}else{
+			Input._onKeyUp({keyCode:90});
+			
+		}
+			  
+    }, 1);
+		 
+   
+      });
+    }
+  });
+});
+		
+		
+		
+	</script>
+
+</body>
+
+</html>
