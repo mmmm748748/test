@@ -1,6 +1,7 @@
 {
     "name": "我是文章測試",
     "short_name": "測試",
+    "start_url": ".",
     "description": "不是假髮，是桂！",
     "icons": [
         {
