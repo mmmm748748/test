@@ -1,0 +1,41 @@
+{
+    "name": "我是文章測試",
+    "short_name": "測試",
+    "start_url": "https://tgtfggfgfg.blogspot.com/index.html",
+    "description": "不是假髮，是桂！",
+    "icons": [
+        {
+            "src": "https://1.bp.blogspot.com/-sQjdg7vzzfg/XsIfo9FXxPI/AAAAAAAAC3o/sxH-7RbT704YLA3jK59ko-PYZuNvW4n9gCK4BGAsYHg/ic_launcher_48.png",
+            "sizes": "48x48",
+            "type": "image/png"
+        },
+        {
+            "src": "https://1.bp.blogspot.com/-xtIZ2vSs7ak/XsIfpI96sTI/AAAAAAAAC3s/PYzdNPcI3JwHxMd5hK8_qSAC0DqHuDSIQCK4BGAsYHg/ic_launcher_72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "https://1.bp.blogspot.com/--f7zEIx5CNo/XsIfpo0ybCI/AAAAAAAAC3w/n6Sjjvezb_g9fOTdlgoE-4PVFEi1YcvqACK4BGAsYHg/ic_launcher_96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "https://1.bp.blogspot.com/-CJv8NGS7i9s/XsIfqAQApZI/AAAAAAAAC30/mc63fG908oIWzosmlNOHp-lcAVScDZCtgCK4BGAsYHg/ic_launcher_144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "https://1.bp.blogspot.com/-7lAEkSl7AnE/XsIfqaD0nCI/AAAAAAAAC34/amwP7-hpyr4T_R3rx8ZBMPiLeNkiCDB1QCK4BGAsYHg/ic_launcher_192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://1.bp.blogspot.com/-qcK1dlJ1axM/XsIfq306eSI/AAAAAAAAC38/TR2rn6Oj59Y7qMG7SIVZvCaNltY2XwDEwCK4BGAsYHg/d/web_hi_res_512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#000000",
+    "display": "standalone"
+}
